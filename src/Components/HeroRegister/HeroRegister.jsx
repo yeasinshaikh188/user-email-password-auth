@@ -1,9 +1,11 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebase.config";
 import { useState } from "react";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 const HeroRegister = () => {
-    const [registerError, setRegisterError] = useState(''); 
+    const [registerError, setRegisterError] = useState('');
+    const [showPassword, setShowPassword] = useState(false);  
     // handle hero submit form
     const handleHeroLoginForm = e =>{
         e.preventDefault(); 
@@ -31,19 +33,34 @@ const HeroRegister = () => {
         quasi. In deleniti eaque aut repudiandae et a id nisi.
       </p>
     </div>
+
+
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <form onSubmit={handleHeroLoginForm} className="card-body">
+
+
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
           </label>
           <input type="email" name="email" placeholder="email" className="input input-bordered" required />
         </div>
+
+
         <div className="form-control">
           <label className="label">
             <span className="label-text">Password</span>
           </label>
-          <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+         <div className="relative">
+         <input type={showPassword?'text' : "password"} name="password" placeholder="password" className="input input-bordered w-full" required />
+         <span className="absolute top-4 right-2"  onClick={() => setShowPassword(!showPassword)}>{showPassword? <IoIosEye></IoIosEye>:<IoIosEyeOff></IoIosEyeOff>}</span>
+         </div>
+         <br />
+        <div>
+        <input type="checkbox" name="terms" id="terms" /> 
+        <label className="ml-2" htmlFor="terms">Accept Our <a href="">terms and Condition</a></label>
+        </div>
+        <br />
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
